@@ -1,0 +1,11 @@
+{
+  "hints": [],
+  "groups": [
+    {
+      "sourceType": "masterspring.masterspring.config.PictureUploadProperties",
+      "name": "upload.pictures",
+      "type": "masterspring.masterspring.config.PictureUploadProperties"
+    }
+  ],
+  "properties": []
+}
