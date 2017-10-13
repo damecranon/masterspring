@@ -1,0 +1,72 @@
+buildscript {
+	ext {
+		springBootVersion = '1.5.7.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+		jcenter()
+		maven {
+			url 'https://plugins.gradle.org/m2'
+		}
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+		/* classpath('io.spring.gradle:propdeps-plugin:0.0.9.RELEASE') */
+		classpath ('com.moowork.gradle:gradle-node-plugin:1.1.1')
+
+
+	}
+}
+
+
+apply plugin: 'org.springframework.boot'
+apply plugin: 'idea'
+apply plugin: 'com.moowork.node'
+
+jar {
+	baseName = 'masterspring'
+	version = '0.0.1'
+}
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+}
+
+node {
+	version = '8.6.0'
+	npmVersion = '3.10.6'
+	download = true
+	nodeModulesDir = file("${project.projectDir}/")
+
+}
+
+
+
+dependencies {
+	compile('org.springframework.boot:spring-boot-starter-web')
+	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
+	compile('org.springframework.boot:spring-boot-starter-social-twitter')
+	compile('org.webjars:materializecss:0.97.0')
+	compile('org.webjars:jquery:3.2.1')
+	compile('org.springframework.boot:spring-boot-configuration-processor')
+	compile('com.fasterxml.jackson.datatype:jackson-datatype-jsr310')
+	compile('io.springfox:springfox-swagger2:2.1.2')
+	compile('io.springfox:springfox-swagger-ui:2.1.2')
+	compile('org.springframework.boot:spring-boot-starter-security')
+	compile('org.thymeleaf.extras:thymeleaf-extras-springsecurity4')
+	compile('com.fasterxml.jackson.dataformat:jackson-dataformat-xml')
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+
+}
+
+//needed by heroku
+task stage {
+	dependsOn build
+}
+
+task wrapper(type: Wrapper){
+	gradleVersion = '4.2'
+}
+
